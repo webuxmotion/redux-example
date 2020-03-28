@@ -2,6 +2,7 @@ import './styles.css'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk';
 import logger from 'redux-logger'
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { rootReducer } from './redux/reducers'
 import { increment, decrement, asyncIncrement, toggleTheme } from './redux/actions'
 
@@ -13,9 +14,8 @@ const themeBtn = document.getElementById('theme')
 
 const store = createStore(
   rootReducer, 
-  compose(
-    applyMiddleware(thunk, logger),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(
+    applyMiddleware(thunk, logger)
   )
 )
 
